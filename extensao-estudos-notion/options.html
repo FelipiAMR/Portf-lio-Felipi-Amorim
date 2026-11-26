@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Estudaí – Configurações</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="options">
+    <h1>⚙️ Configurações do Estudaí</h1>
+    <p class="muted">As chaves ficam salvas só neste navegador.</p>
+
+    <h2>1. Claude (gera os resumos)</h2>
+    <label>Chave da API do Claude</label>
+    <input id="anthropicKey" type="password" placeholder="sk-ant-..." />
+    <small>Crie em console.anthropic.com → API Keys.</small>
+    <label>Modelo</label>
+    <select id="model">
+      <option value="claude-opus-5-5">Claude Opus 5.5 (melhor explicação – recomendado)</option>
+      <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (mais barato)</option>
+    </select>
+
+    <h2>2. Notion (onde as aulas são salvas)</h2>
+    <label>Token da integração do Notion</label>
+    <input id="notionToken" type="password" placeholder="ntn_... ou secret_..." />
+    <small>Crie em notion.so/my-integrations → Nova integração (interna) → copie o token.</small>
+    <label>Link da página raiz</label>
+    <input id="notionRoot" placeholder="https://www.notion.so/Meus-Estudos-1a2b3c..." />
+    <small>Crie uma página (ex.: “Meus Estudos”), clique em ••• → Conexões → adicione sua integração, e cole o link aqui.</small>
+    <label>Nome do curso</label>
+    <input id="courseName" placeholder="Ex.: Rocketseat – Formação Full-Stack" />
+    <small>Vira a pasta do curso. Cada aula vira uma pasta dentro dela.</small>
+
+    <h2>3. Transcrição por áudio (opcional)</h2>
+    <label>Chave da API da OpenAI (Whisper)</label>
+    <input id="openaiKey" type="password" placeholder="sk-..." />
+    <small>Só é necessária se a aula não tiver legendas. O modo “legendas” é gratuito.</small>
+    <label>Modo padrão</label>
+    <select id="defaultMode">
+      <option value="captions">Legendas do player</option>
+      <option value="audio">Áudio da aba</option>
+    </select>
+
+    <div class="row">
+      <button id="save" class="primary">Salvar</button>
+      <button id="test" class="secondary">Testar conexão com o Notion</button>
+    </div>
+    <p id="msg" class="status"></p>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

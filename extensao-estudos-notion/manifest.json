@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Estudaí – Resumos de Aula no Notion",
+  "version": "1.0.0",
+  "description": "Captura a transcrição das aulas enquanto você assiste, gera um resumo didático com o Claude e salva no Notion.",
+  "permissions": ["storage", "tabs", "activeTab", "scripting", "tabCapture", "offscreen"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": { "default_popup": "popup.html", "default_title": "Estudaí" },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}

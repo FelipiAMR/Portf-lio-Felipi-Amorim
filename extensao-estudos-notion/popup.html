@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="popup">
+    <header>
+      <h1>📚 Estudaí</h1>
+      <a href="#" id="openOptions" title="Configurações">⚙️</a>
+    </header>
+
+    <div id="setupWarning" class="warning hidden">
+      Configure as chaves do Claude e do Notion antes de começar.
+      <button id="goSetup" class="secondary">Abrir configurações</button>
+    </div>
+
+    <section>
+      <label>Título da aula</label>
+      <input id="lessonTitle" placeholder="Pega o título da aba automaticamente" />
+
+      <label>Módulo (opcional)</label>
+      <input id="moduleName" placeholder="Ex.: Módulo 2 – React" />
+
+      <label>Como capturar</label>
+      <select id="mode">
+        <option value="captions">Legendas do player (grátis – ligue o CC)</option>
+        <option value="audio">Áudio da aba (transcrição por voz)</option>
+      </select>
+    </section>
+
+    <div class="row">
+      <button id="startBtn">▶️ Começar captura</button>
+      <button id="stopBtn" class="secondary hidden">⏸️ Pausar</button>
+    </div>
+
+    <div class="counter"><span id="dot" class="dot"></span><span id="counter">0 trechos capturados</span></div>
+
+    <details>
+      <summary>Ver transcrição capturada</summary>
+      <pre id="preview"></pre>
+    </details>
+
+    <label>Suas anotações / dúvidas (opcional)</label>
+    <textarea id="notes" rows="3" placeholder="O Claude vai considerar isso. Você também pode colar uma transcrição aqui."></textarea>
+
+    <button id="generateBtn" class="primary">✨ Terminei a aula: gerar resumo e salvar no Notion</button>
+
+    <p id="status" class="status"></p>
+    <p id="result" class="result"></p>
+
+    <button id="resetBtn" class="link">Limpar e começar próxima aula</button>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
