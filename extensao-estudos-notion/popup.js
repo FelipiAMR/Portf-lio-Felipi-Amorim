@@ -18,7 +18,7 @@ async function render() {
   ]);
   const s = session || { active: false, lines: [] };
 
-  $("setupWarning").classList.toggle("hidden", !!(settings?.anthropicKey && settings?.notionToken && settings?.notionRoot));
+  $("setupWarning").classList.toggle("hidden", !!(((settings?.provider || "gemini") === "gemini" ? settings?.geminiKey : settings?.anthropicKey) && settings?.notionToken && settings?.notionRoot));
   $("startBtn").classList.toggle("hidden", s.active);
   $("stopBtn").classList.toggle("hidden", !s.active);
   $("startBtn").textContent = s.lines?.length ? "▶️ Continuar captura" : "▶️ Começar captura";

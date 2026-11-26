@@ -9,15 +9,35 @@
     <h1>⚙️ Configurações do Estudaí</h1>
     <p class="muted">As chaves ficam salvas só neste navegador.</p>
 
-    <h2>1. Claude (gera os resumos)</h2>
-    <label>Chave da API do Claude</label>
-    <input id="anthropicKey" type="password" placeholder="sk-ant-..." />
-    <small>Crie em console.anthropic.com → API Keys.</small>
-    <label>Modelo</label>
-    <select id="model">
-      <option value="claude-opus-5-5">Claude Opus 5.5 (melhor explicação – recomendado)</option>
-      <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (mais barato)</option>
+    <h2>1. Inteligência que gera os resumos</h2>
+    <label>Provedor</label>
+    <select id="provider">
+      <option value="gemini">Google Gemini (grátis)</option>
+      <option value="claude">Claude (API paga)</option>
     </select>
+
+    <div id="geminiBox">
+      <label>Chave grátis do Gemini</label>
+      <input id="geminiKey" type="password" placeholder="AIza..." />
+      <small>Crie grátis (sem cartão) em aistudio.google.com/apikey → “Create API key”.</small>
+      <label>Modelo</label>
+      <select id="geminiModel">
+        <option value="auto">Automático (Flash mais recente grátis – recomendado)</option>
+        <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+        <option value="gemini-2.5-pro">Gemini 2.5 Pro (cota grátis bem menor)</option>
+      </select>
+    </div>
+
+    <div id="claudeBox">
+      <label>Chave da API do Claude</label>
+      <input id="anthropicKey" type="password" placeholder="sk-ant-..." />
+      <small>Crie em console.anthropic.com → API Keys (pago).</small>
+      <label>Modelo</label>
+      <select id="model">
+        <option value="claude-opus-5-5">Claude Opus 5.5</option>
+        <option value="claude-sonnet-5-5">Claude Sonnet 5.5 (mais barato)</option>
+      </select>
+    </div>
 
     <h2>2. Notion (onde as aulas são salvas)</h2>
     <label>Token da integração do Notion</label>

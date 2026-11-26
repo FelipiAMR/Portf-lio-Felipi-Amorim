@@ -1,6 +1,6 @@
 # 📚 Estudaí: resumos de aula direto no Notion
 
-Extensão do Chrome que, **enquanto você assiste às aulas**, captura o que o professor fala. Quando você termina, ela gera com o Claude um **resumo + explicação bem didática** e cria uma **pasta da aula no Notion**.
+Extensão do Chrome que, **enquanto você assiste às aulas**, captura o que o professor fala. Quando você termina, ela gera com IA (**Google Gemini, grátis**, ou Claude) um **resumo + explicação bem didática** e cria uma **pasta da aula no Notion**.
 
 ## Como fica no Notion
 
@@ -27,7 +27,7 @@ O **Resumo e explicação** tem estas seções: resumo em uma frase, resumo da a
 
 Clique no ícone e depois em ⚙️:
 
-1. **Chave do Claude**: crie em <https://console.anthropic.com> → *API Keys*.
+1. **Chave grátis do Gemini**: entre em <https://aistudio.google.com/apikey> com sua conta Google → **Create API key** → copie (começa com `AIza`). Não precisa de cartão.
 2. **Notion**:
    - Acesse <https://www.notion.so/my-integrations> → **Nova integração** (interna) e copie o token.
    - No Notion, crie uma página (ex.: "Meus Estudos"), clique em `•••` → **Conexões** e adicione a sua integração.
@@ -52,7 +52,8 @@ Também dá para colar uma transcrição pronta no campo de anotações.
 ## Custos aproximados
 
 - Legendas: grátis.
-- Claude Opus 5.5: cerca de US$ 0,10 a 0,30 por aula de 30 a 60 min. O Sonnet 5.5 custa metade.
+- Gemini (padrão): grátis dentro da cota diária do Google AI Studio. No plano grátis, o Google pode usar os textos enviados para melhorar os modelos dele.
+- Claude (opcional, pago): cerca de US$ 0,10 a 0,30 por aula.
 - Whisper (só no modo áudio): cerca de US$ 0,006 por minuto.
 
 ## Arquivos
@@ -61,7 +62,9 @@ Também dá para colar uma transcrição pronta no campo de anotações.
 |---|---|
 | `content.js` | Lê as legendas do `<video>` e dos players (Vimeo, YouTube, video.js etc.), inclusive dentro de iframes |
 | `background.js` | Guarda a transcrição e orquestra a geração e o envio |
-| `claude.js` | Prompt didático e chamada à API do Claude |
+| `prompt.js` | Prompt didático (inclui o modo para estudo bíblico) |
+| `gemini.js` | Chamada à API gratuita do Gemini (escolhe o melhor Flash disponível) |
+| `claude.js` | Chamada à API do Claude (opcional) |
 | `notion.js` | Cria as pastas e converte Markdown em blocos do Notion |
 | `offscreen.js` | Modo áudio: grava a aba e transcreve |
 | `popup.*` / `options.*` | Interface |

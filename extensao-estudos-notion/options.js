@@ -1,6 +1,6 @@
 import { extractNotionId, testNotion } from "./notion.js";
 
-const FIELDS = ["anthropicKey", "model", "notionToken", "notionRoot", "courseName", "openaiKey", "defaultMode"];
+const FIELDS = ["provider", "geminiKey", "geminiModel", "anthropicKey", "model", "notionToken", "notionRoot", "courseName", "openaiKey", "defaultMode"];
 const $ = (id) => document.getElementById(id);
 
 function msg(text, kind = "info") {
@@ -37,4 +37,11 @@ $("test").onclick = async () => {
   }
 };
 
-load();
+function toggleProvider() {
+  const p = $("provider").value;
+  $("geminiBox").classList.toggle("hidden", p !== "gemini");
+  $("claudeBox").classList.toggle("hidden", p !== "claude");
+}
+$("provider").addEventListener("change", toggleProvider);
+
+load().then(toggleProvider);

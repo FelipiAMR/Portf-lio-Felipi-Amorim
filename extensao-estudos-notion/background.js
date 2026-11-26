@@ -1,4 +1,5 @@
 import { generateSummary } from "./claude.js";
+import { generateSummaryGemini } from "./gemini.js";
 import { saveLessonToNotion, extractNotionId } from "./notion.js";
 
 const DEFAULT_SESSION = { active: false, mode: "captions", tabId: null, title: "", url: "", startedAt: null, lines: [] };
@@ -162,21 +163,21 @@ async function generate({ notes, lessonTitle, moduleName }) {
     const settings = await getSettings();
     const transcript = s.lines.join("\n");
 
-    if (!settings.anthropicKey) throw new Error("Configure a chave da API do Claude nas opções.");
+    const provider = settings.provider || "gemini";
+    if (provider === "gemini" && !settings.geminiKey) throw new Error("Configure a chave grátis do Gemini nas opções.");
+    if (provider === "claude" && !settings.anthropicKey) throw new Error("Configure a chave da API do Claude nas opções.");
     if (!settings.notionToken || !settings.notionRoot) throw new Error("Configure o token e a página do Notion nas opções.");
     if (transcript.trim().length < 50 && !(notes || "").trim()) {
       throw new Error("Quase nada foi capturado. Ligue as legendas do player ou use o modo áudio.");
     }
 
     const title = (lessonTitle || s.title || "Aula").trim();
-    await setStatus("🧠 Gerando resumo e explicações com o Claude… (pode levar alguns minutos)", "busy");
-    const summaryMd = await generateSummary({
-      apiKey: settings.anthropicKey,
-      model: settings.model,
-      title,
-      transcript,
-      notes
-    });
+    const aiName = provider === "gemini" ? "Gemini" : "Claude";
+    await setStatus(`🧠 Gerando resumo e explicações com o ${aiName}… (pode levar alguns minutos)`, "busy");
+    const summaryMd =
+      provider === "gemini"
+        ? await generateSummaryGemini({ apiKey: settings.geminiKey, model: settings.geminiModel, title, transcript, notes })
+        : await generateSummary({ apiKey: settings.anthropicKey, model: settings.model, title, transcript, notes });
     await chrome.storage.local.set({ lastSummary: { title, summaryMd, at: Date.now() } });
 
     await setStatus("📤 Criando a pasta da aula no Notion…", "busy");
